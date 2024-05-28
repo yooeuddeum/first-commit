@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
     <link rel="stylesheet" href="index.css" />
+    <style>
+      body {
+        margin: 100px 800px;
+        background: darkgray;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        font-size: 25px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <h1>Secreat Note</h1>
@@ -12,7 +30,8 @@
       <label for="title">Title:</label><br />
       <input type="text" id="title" name="title" /><br />
       <label for="content">Content:</label><br />
-      <textarea id="content" name="content" rows="10" cols="30"></textarea><br />
+      <textarea id="content" name="content" rows="10" cols="30"></textarea
+      ><br />
       <button type="submit">제출</button>
       <script src="index.js"></script>
     </form>
