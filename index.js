@@ -18,8 +18,30 @@ const server = http.createServer((req, res) => {
         res.end(data);
       });
     } else {
-      res.writeHead(404, {"Content-Type" : "text/plain"});
-      res.end()
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end();
+    }
+  } else if (req.method === "POST") {
+    if (req.url === "/submit") {
+      let body = "";
+      req.on("data", (chunk) => {
+        body += chunk.toString();
+      });
+      req.on("end", () => {
+        const params = new URLSearchParams(body);
+        const title = params.get("title");
+        const Content = params.get("content");
+        const postData = `title : ${title} Content : ${Content}`;
+        fs.appendFile("post.txt", postData, (err) => {
+          if (err) {
+            res.writeHead(500, { "Content-Type": "text/plain" });
+            res.end();
+          }
+        });
+      });
+    } else {
+      res.writeHead(404, { "Content-Type": "text/plain" });
+      res.end();
     }
   }
 });
