@@ -39,6 +39,26 @@ const server = http.createServer((req, res) => {
           }
         });
       });
+    } else if (req.url === "/styles.css") {
+      fs.readFile(path.join(__dirname, "styles.css"), (err, data) => {
+        if (err) {
+          res.writeHead(500, { "Content-Type": "text/plain" });
+          res.end();
+          return;
+        }
+        res.writeHead(200, { "Content-Type": "text/css" });
+        res.end(data);
+      });
+    } else if (req.url === "/script.js") {
+      fs.readFile(path.join(__dirname, "script.js"), (err, data) => {
+        if (err) {
+          res.writeHead(500, { "Content-Type": "text/plain" });
+          res.end();
+          return;
+        }
+        res.writeHead(200, { "Content-Type": "application/javascript" });
+        res.end(data);
+      });
     } else {
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end();
