@@ -4,6 +4,7 @@ const fs = require("fs");
 // console.log(fs);
 const path = require("path");
 // console.log(path);
+const qs = require("node:querystring");
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
@@ -41,20 +42,21 @@ const server = http.createServer((req, res) => {
       res.writeHead(404, { "Content-Type": "text/plain" });
       res.end();
     }
-  } else if (req.method === "POST") {
-    if (req.url === "/savaData") {
+  }
+  if (req.method === "POST") {
+    if (req.url === "/saveData") {
       let body = "";
       req.on("data", (chunk) => {
         body += chunk.toString();
       });
       req.on("end", () => {
-        const { data } = JSON.parse(body);
+        const data = qs.parse(body);
         // const params = new URLSearchParams(body);
         // const title = params.get("title");
         // const Content = params.get("content");
         // const postData = `title : ${title} Content : ${Content}`;
 
-        fs.appendFile("data.txt", data, (err) => {
+        fs.appendFile("data.json", JSON.stringify(data), (err) => {
           if (err) {
             res.writeHead(500, { "Content-Type": "text/plain" });
             res.end();
