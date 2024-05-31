@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < notes.length; i++) {
       const note = notes[i];
       const li = document.createElement("li");
-      li.innerHTML = `${note.date} ${note.title} ${note.content}`;
+      li.innerHTML = `${note.date} <strong>${note.title}</strong> ${note.content}`;
       notesList.appendChild(li);
     }
   }
