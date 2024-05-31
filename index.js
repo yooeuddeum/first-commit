@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 // console.log(path);
 const qs = require("node:querystring");
+// console.log(qs);
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
