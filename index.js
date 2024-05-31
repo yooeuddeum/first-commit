@@ -42,21 +42,25 @@ const server = http.createServer((req, res) => {
       res.end();
     }
   } else if (req.method === "POST") {
-    if (req.url === "/submit") {
+    if (req.url === "/savaData") {
       let body = "";
       req.on("data", (chunk) => {
         body += chunk.toString();
       });
       req.on("end", () => {
-        const params = new URLSearchParams(body);
-        const title = params.get("title");
-        const Content = params.get("content");
-        const postData = `title : ${title} Content : ${Content}`;
-        fs.appendFile("data.txt", postData, (err) => {
+        const { data } = JSON.parse(body);
+        // const params = new URLSearchParams(body);
+        // const title = params.get("title");
+        // const Content = params.get("content");
+        // const postData = `title : ${title} Content : ${Content}`;
+
+        fs.appendFile("data.txt", data, (err) => {
           if (err) {
             res.writeHead(500, { "Content-Type": "text/plain" });
             res.end();
           }
+          res.writeHead(200, { "Content-Type": "text/plain" });
+          res.end();
         });
       });
     } else {
