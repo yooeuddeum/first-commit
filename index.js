@@ -57,7 +57,7 @@ const server = http.createServer((req, res) => {
         // const Content = params.get("content");
         // const postData = `title : ${title} Content : ${Content}`;
 
-        fs.appendFile("data.json", JSON.stringify(data), (err) => {
+        fs.appendFile("data.txt", JSON.stringify(data), (err) => {
           if (err) {
             res.writeHead(500, { "Content-Type": "text/plain" });
             res.end();
